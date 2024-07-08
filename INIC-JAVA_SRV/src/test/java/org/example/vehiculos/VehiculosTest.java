@@ -1,23 +1,25 @@
 package org.example.vehiculos;
 
-import static org.example.api.vehiculos.TipoVehiculo.COCHE;
-import static org.example.api.vehiculos.TipoVehiculo.MOTOCICLETA;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static es.aeat.inic.java.api.vehiculos.TipoVehiculo.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
-import org.example.api.INIC_JAVA_Factory;
-import org.example.api.vehiculos.BarcoTrait;
-import org.example.api.vehiculos.VehiculoTrait;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import es.aeat.inic.java.api.INIC_JAVA_Factory;
+import es.aeat.inic.java.api.vehiculos.BarcoTrait;
+import es.aeat.inic.java.api.vehiculos.VehiculoTrait;
+import es.aeat.inic.java.vehiculos.Barco;
+import es.aeat.inic.java.vehiculos.Coche;
+import es.aeat.inic.java.vehiculos.Motocicleta;
 
 class VehiculosTest implements BarcoTrait, VehiculoTrait {
 
-	static final String lineSeparator = System.getProperty("line.separator"); 
+	static final String LINE_SEPARATOR = System.getProperty("line.separator"); 
 
 	private static final String EXPECTED = """
 			[INFO] preparando la furgo camperizada para el viaje...
@@ -37,26 +39,20 @@ class VehiculosTest implements BarcoTrait, VehiculoTrait {
 			[INFO] el Optimist está OK. Viajando a Cabo Verde...
 						""";
 
-	ByteArrayOutputStream out;
-	
+	ByteArrayOutputStream out = new ByteArrayOutputStream();
+
 	@BeforeAll
 	static void beforeAll() {
-		if (!lineSeparator.equals("\n")) {
-			System.setProperty("line.separator", "\n");	
+		if (!LINE_SEPARATOR.equals("\n")) {
+			System.setProperty("line.separator", "\n");
 		}
 	}
 	
-//	@AfterAll
+	@AfterAll
 	static void afterAll() {
-		if (!lineSeparator.equals("\n")) {
-			System.setProperty("line.separator", lineSeparator);	
+		if (!LINE_SEPARATOR.equals("\n")) {
+			System.setProperty("line.separator", LINE_SEPARATOR);	
 		}
-	}
-	
-	@BeforeEach
-	void beforeEach() throws Exception {
-		out = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(out));
 	}
 	
 	@AfterEach
@@ -75,6 +71,16 @@ class VehiculosTest implements BarcoTrait, VehiculoTrait {
 	}
 
 	@Test
+	void traits() {
+		var furgo = getVehiculoBean(COCHE, "la furgo camperizada", out);
+		viajar(furgo, "Berlín");
+		var moto = getVehiculoBean(MOTOCICLETA, "la moto del Dakar", out);
+		viajar(moto, "Los Monegros");
+		var velero = getBarcoBean("el Optimist", true, out);
+		viajar(velero, "Cabo Verde");
+	}
+
+	@Test
 	void services() {
 		var vehiculos = INIC_JAVA_Factory.getVehiculoSrv();
 		var furgo = vehiculos.getVehiculoBean(COCHE, "la furgo camperizada", out);
@@ -85,15 +91,5 @@ class VehiculosTest implements BarcoTrait, VehiculoTrait {
 		var velero = barcos.getBarcoBean("el Optimist", true, out);
 		vehiculos.viajar(velero, "Cabo Verde");
 	}
-
-	@Test
-	void traits() {
-		var furgo = getVehiculoBean(COCHE, "la furgo camperizada", out);
-		viajar(furgo, "Berlín");
-		var moto = getVehiculoBean(MOTOCICLETA, "la moto del Dakar", out);
-		viajar(moto, "Los Monegros");
-		var velero = getBarcoBean("el Optimist", true, out);
-		viajar(velero, "Cabo Verde");
-	}
-
+	
 }
