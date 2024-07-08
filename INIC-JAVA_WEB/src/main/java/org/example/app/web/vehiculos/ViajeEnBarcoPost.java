@@ -25,11 +25,11 @@ class ViajeEnBarcoPost {
 		viajar();
 	}
 	
-	void setBarco() throws Exception {
+	void setBarco() {
 		barco = new Barco(nombre, tieneVela, out);
 	}
 	
-	void validarParametros() throws Exception {
+	void validarParametros() {
 		if (nombre.equals(null)) {
 			throw new IllegalArgumentException("nombre");
 		}
@@ -38,7 +38,7 @@ class ViajeEnBarcoPost {
 		}
 	}
 
-	void viajar() throws Exception {
+	void viajar() {
 		barco.viajar(destino);
 	}
 
