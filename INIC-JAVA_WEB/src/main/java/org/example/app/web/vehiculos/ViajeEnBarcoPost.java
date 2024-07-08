@@ -1,5 +1,6 @@
 package org.example.app.web.vehiculos;
 
+import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ class ViajeEnBarcoPost {
 	boolean tieneVela;
 	Barco barco;
 	
-	ViajeEnBarcoPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	ViajeEnBarcoPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		nombre = request.getParameter("nombre");
 		destino = request.getParameter("destino");
 		tieneVela = request.getParameter("tiene-vela") != null;
