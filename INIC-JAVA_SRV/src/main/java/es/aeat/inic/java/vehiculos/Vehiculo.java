@@ -11,7 +11,7 @@ public abstract class Vehiculo implements VehiculoBean {
 	public final String nombre;
 	protected final Logger logger;
 
-	protected Vehiculo(String nombre, OutputStream out) throws Exception {
+	protected Vehiculo(String nombre, OutputStream out) {
 		if (out == null) {
 			logger = App.logger;
 		} else {
@@ -25,9 +25,9 @@ public abstract class Vehiculo implements VehiculoBean {
 		this(nombre, null);
 	}
 
-	protected abstract void preparar() throws Exception;
+	protected abstract void preparar();
 
-	public void viajar(String destino) throws Exception {
+	public void viajar(String destino) {
 		logger.info("preparando %s para el viaje...".formatted(nombre));
 		preparar();
 		logger.info("%s está OK. Viajando a %s...".formatted(nombre, destino));

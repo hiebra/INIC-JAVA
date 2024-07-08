@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import es.aeat.inic.java.api.INIC_JAVA_Factory;
+import es.aeat.inic.java.api.vehiculos.BarcoSrv;
 import es.aeat.inic.java.api.vehiculos.BarcoTrait;
 import es.aeat.inic.java.api.vehiculos.VehiculoTrait;
 import es.aeat.inic.java.vehiculos.Barco;
@@ -56,12 +57,12 @@ class VehiculosTest implements BarcoTrait, VehiculoTrait {
 	}
 	
 	@AfterEach
-	void afterEach() throws Exception {
+	void afterEach() {
 		assertEquals(EXPECTED, new String(out.toByteArray()));		
 	}
 
 	@Test
-	void classes() throws Exception {
+	void classes() {
 		var furgo = new Coche("la furgo camperizada", out);
 		furgo.viajar("Berlín");
 		var moto = new Motocicleta("la moto del Dakar", out);
@@ -87,7 +88,7 @@ class VehiculosTest implements BarcoTrait, VehiculoTrait {
 		vehiculos.viajar(furgo, "Berlín");
 		var moto = vehiculos.getVehiculoBean(MOTOCICLETA, "la moto del Dakar", out);
 		vehiculos.viajar(moto, "Los Monegros");
-		var barcos = INIC_JAVA_Factory.getBarcoSrv();
+		BarcoSrv barcos = INIC_JAVA_Factory.getBarcoSrv();
 		var velero = barcos.getBarcoBean("el Optimist", true, out);
 		vehiculos.viajar(velero, "Cabo Verde");
 	}

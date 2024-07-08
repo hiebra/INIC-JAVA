@@ -17,37 +17,25 @@ public class VehiculoSrvImpl implements VehiculoSrv {
 
 	@Override
 	public VehiculoBean getVehiculoBean(TipoVehiculo tipo, String nombre) {
-		try {
-			if (tipo == TipoVehiculo.BARCO) {
-				 return new Barco(nombre);
-			} else if (tipo == TipoVehiculo.COCHE) {
-				return new Coche(nombre);
-			} else if (tipo == TipoVehiculo.MOTOCICLETA) {
-				return new Motocicleta(nombre);
-			} else {
-				throw new IllegalArgumentException("Valor no esperado del parámetro 'tipo': %s".formatted(tipo));
-			}	
-		} catch (RuntimeException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
+		if (tipo == TipoVehiculo.BARCO) {
+			return new Barco(nombre);
+		} else if (tipo == TipoVehiculo.COCHE) {
+			return new Coche(nombre);
+		} else if (tipo == TipoVehiculo.MOTOCICLETA) {
+			return new Motocicleta(nombre);
+		} else {
+			throw new IllegalArgumentException("Valor no esperado del parámetro 'tipo': %s".formatted(tipo));
 		}
 	}
-	
+
 	@Override
 	public VehiculoBean getVehiculoBean(TipoVehiculo tipo, String nombre, OutputStream output) {
-		try {
-			if (tipo == TipoVehiculo.COCHE) {
-				return new Coche(nombre, output);
-			} else if (tipo == TipoVehiculo.MOTOCICLETA) {
-				return new Motocicleta(nombre, output);
-			} else {
-				throw new IllegalArgumentException("Valor no esperado del parámetro 'tipo': %s".formatted(tipo));
-			}	
-		} catch (RuntimeException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
+		if (tipo == TipoVehiculo.COCHE) {
+			return new Coche(nombre, output);
+		} else if (tipo == TipoVehiculo.MOTOCICLETA) {
+			return new Motocicleta(nombre, output);
+		} else {
+			throw new IllegalArgumentException("Valor no esperado del parámetro 'tipo': %s".formatted(tipo));
 		}
 	}
 

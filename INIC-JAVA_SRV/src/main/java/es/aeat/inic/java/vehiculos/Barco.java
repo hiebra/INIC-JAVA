@@ -8,21 +8,21 @@ public class Barco extends Vehiculo implements BarcoBean {
 
 	public final boolean tieneVela;
 	
-	public Barco(String nombre) throws Exception {
+	public Barco(String nombre) {
 		this(nombre, false);
 	}
 	
-	public Barco(String nombre, boolean tieneVela) throws Exception {
+	public Barco(String nombre, boolean tieneVela) {
 		this(nombre, false, null);
 	}
 	
-	public Barco(String nombre, boolean tieneVela, OutputStream output) throws Exception {
+	public Barco(String nombre, boolean tieneVela, OutputStream output) {
 		super(nombre, output);
 		this.tieneVela = tieneVela;
 	}
 
 	@Override
-	protected void preparar() throws Exception {
+	protected void preparar() {
 		if (tieneVela) {
 			logger.info("comprobando el estado de la vela...");	
 		}

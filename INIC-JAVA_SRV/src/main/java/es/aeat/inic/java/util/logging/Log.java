@@ -16,7 +16,7 @@ public class Log {
 		return logger;
 	}
 	
-	public static void configure(Logger logger, OutputStream outputStream, Function<LogRecord, String> formatter) throws Exception {
+	public static void configure(Logger logger, OutputStream outputStream, Function<LogRecord, String> formatter) {
 		configure(logger, outputStream, formatter == null? null : new Formatter() {
 			final String lineSeparator = System.getProperty("line.separator");
 			@Override
@@ -26,7 +26,7 @@ public class Log {
 		});
 	}
 	
-	public static void configure(Logger logger, OutputStream outputStream, Formatter formatter) throws Exception {
+	public static void configure(Logger logger, OutputStream outputStream, Formatter formatter) {
 		for (Handler handler : logger.getHandlers()) {
 			logger.removeHandler(handler);
 		}
