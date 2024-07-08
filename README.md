@@ -1,1 +1,1 @@
-La presentación (index.pptx) que sirve como guía del contenido de este repositorio se encuentra está incompleta y su contenido se irá modificando para que refleje adecuadamente los ejemplos disponibles en el código y las modificaciones que se les puedan ir incorporando
+La presentación que sirve como guía del contenido de este repositorio está incompleta y su contenido se irá modificando para que refleje adecuadamente los ejemplos disponibles en el código y las modificaciones que se les puedan ir incorporando
