@@ -1,22 +1,21 @@
 package org.example.vehiculos;
 
-import static es.aeat.inic.java.api.vehiculos.TipoVehiculo.*;
+import static org.example.api.vehiculos.TipoVehiculo.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 
+import org.example.api.INIC_JAVA_Factory;
+import org.example.api.vehiculos.BarcoSrv;
+import org.example.api.vehiculos.BarcoTrait;
+import org.example.api.vehiculos.VehiculoTrait;
+import org.example.vehiculos.Barco;
+import org.example.vehiculos.Coche;
+import org.example.vehiculos.Motocicleta;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import es.aeat.inic.java.api.INIC_JAVA_Factory;
-import es.aeat.inic.java.api.vehiculos.BarcoSrv;
-import es.aeat.inic.java.api.vehiculos.BarcoTrait;
-import es.aeat.inic.java.api.vehiculos.VehiculoTrait;
-import es.aeat.inic.java.vehiculos.Barco;
-import es.aeat.inic.java.vehiculos.Coche;
-import es.aeat.inic.java.vehiculos.Motocicleta;
 
 class VehiculosTest implements BarcoTrait, VehiculoTrait {
 
