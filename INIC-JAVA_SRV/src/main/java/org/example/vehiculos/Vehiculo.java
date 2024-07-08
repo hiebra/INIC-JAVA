@@ -12,12 +12,11 @@ public abstract class Vehiculo implements VehiculoBean {
 	protected final Logger logger;
 
 	protected Vehiculo(String nombre, OutputStream out) throws Exception {
-		super();
 		if (out == null) {
 			logger = App.logger;
 		} else {
 			logger = Logger.getAnonymousLogger();
-			Log.configure(logger, out, App::message);
+			Log.configure(logger, System.out, App::message);
 		}
 		this.nombre = nombre;
 	}

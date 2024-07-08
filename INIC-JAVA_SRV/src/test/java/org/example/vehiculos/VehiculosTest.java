@@ -1,15 +1,15 @@
 package org.example.vehiculos;
 
-import static org.example.api.vehiculos.TipoVehiculo.*;
-import static org.example.vehiculos.App.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.example.api.vehiculos.TipoVehiculo.COCHE;
+import static org.example.api.vehiculos.TipoVehiculo.MOTOCICLETA;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.example.api.INIC_JAVA_Factory;
 import org.example.api.vehiculos.BarcoTrait;
 import org.example.api.vehiculos.VehiculoTrait;
-import org.example.util.logging.Log;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +56,7 @@ class VehiculosTest implements BarcoTrait, VehiculoTrait {
 	@BeforeEach
 	void beforeEach() throws Exception {
 		out = new ByteArrayOutputStream();
-		Log.configure(logger, out, App::message);		
+		System.setOut(new PrintStream(out));
 	}
 	
 	@AfterEach
@@ -64,41 +64,35 @@ class VehiculosTest implements BarcoTrait, VehiculoTrait {
 		assertEquals(EXPECTED, new String(out.toByteArray()));		
 	}
 
-//	@Test
-	void x() {
-		logger.info("X");
-		logger.info("Y");
-	}
-	
 	@Test
 	void classes() throws Exception {
-		var furgo = new Coche("la furgo camperizada");
+		var furgo = new Coche("la furgo camperizada", out);
 		furgo.viajar("Berlín");
-		var moto = new Motocicleta("la moto del Dakar");
+		var moto = new Motocicleta("la moto del Dakar", out);
 		moto.viajar("Los Monegros");
-		var velero = new Barco("el Optimist", true);
+		var velero = new Barco("el Optimist", true, out);
 		velero.viajar("Cabo Verde");
 	}
 
-//	@Test
+	@Test
 	void services() {
 		var vehiculos = INIC_JAVA_Factory.getVehiculoSrv();
-		var furgo = vehiculos.getVehiculoBean(COCHE, "la furgo camperizada");
+		var furgo = vehiculos.getVehiculoBean(COCHE, "la furgo camperizada", out);
 		vehiculos.viajar(furgo, "Berlín");
-		var moto = vehiculos.getVehiculoBean(MOTOCICLETA, "la moto del Dakar");
+		var moto = vehiculos.getVehiculoBean(MOTOCICLETA, "la moto del Dakar", out);
 		vehiculos.viajar(moto, "Los Monegros");
 		var barcos = INIC_JAVA_Factory.getBarcoSrv();
-		var velero = barcos.getBarcoBean("el Optimist", true);
+		var velero = barcos.getBarcoBean("el Optimist", true, out);
 		vehiculos.viajar(velero, "Cabo Verde");
 	}
 
-//	@Test
+	@Test
 	void traits() {
-		var furgo = getVehiculoBean(COCHE, "la furgo camperizada");
+		var furgo = getVehiculoBean(COCHE, "la furgo camperizada", out);
 		viajar(furgo, "Berlín");
-		var moto = getVehiculoBean(MOTOCICLETA, "la moto del Dakar");
+		var moto = getVehiculoBean(MOTOCICLETA, "la moto del Dakar", out);
 		viajar(moto, "Los Monegros");
-		var velero = getBarcoBean("el Optimist", true);
+		var velero = getBarcoBean("el Optimist", true, out);
 		viajar(velero, "Cabo Verde");
 	}
 

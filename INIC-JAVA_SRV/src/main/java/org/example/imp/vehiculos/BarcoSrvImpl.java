@@ -1,5 +1,7 @@
 package org.example.imp.vehiculos;
 
+import java.io.OutputStream;
+
 import org.example.api.vehiculos.BarcoBean;
 import org.example.api.vehiculos.BarcoSrv;
 import org.example.vehiculos.Barco;
@@ -25,6 +27,17 @@ public class BarcoSrvImpl implements BarcoSrv {
 	public BarcoBean getBarcoBean(String nombre, boolean vela) {
 		try {
 			return new Barco(nombre, vela);
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	@Override
+	public BarcoBean getBarcoBean(String nombre, boolean vela, OutputStream output) {
+		try {
+			return new Barco(nombre, vela, output);
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {

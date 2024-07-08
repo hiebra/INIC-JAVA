@@ -1,5 +1,7 @@
 package org.example.imp.vehiculos;
 
+import java.io.OutputStream;
+
 import org.example.api.vehiculos.TipoVehiculo;
 import org.example.api.vehiculos.VehiculoBean;
 import org.example.api.vehiculos.VehiculoSrv;
@@ -22,6 +24,23 @@ public class VehiculoSrvImpl implements VehiculoSrv {
 				return new Coche(nombre);
 			} else if (tipo == TipoVehiculo.MOTOCICLETA) {
 				return new Motocicleta(nombre);
+			} else {
+				throw new IllegalArgumentException("Valor no esperado del parámetro 'tipo': %s".formatted(tipo));
+			}	
+		} catch (RuntimeException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	@Override
+	public VehiculoBean getVehiculoBean(TipoVehiculo tipo, String nombre, OutputStream output) {
+		try {
+			if (tipo == TipoVehiculo.COCHE) {
+				return new Coche(nombre, output);
+			} else if (tipo == TipoVehiculo.MOTOCICLETA) {
+				return new Motocicleta(nombre, output);
 			} else {
 				throw new IllegalArgumentException("Valor no esperado del parámetro 'tipo': %s".formatted(tipo));
 			}	
